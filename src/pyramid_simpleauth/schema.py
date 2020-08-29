@@ -3,7 +3,7 @@
 """Provides FormEncode based validators and schemas."""
 
 import re
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from formencode import validators, Schema
 from formencode import Invalid
