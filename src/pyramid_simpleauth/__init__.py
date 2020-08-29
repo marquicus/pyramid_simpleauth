@@ -23,19 +23,19 @@ def includeme(config):
 
           >>> includeme(mock_config)
           >>> args = (get_is_authenticated, 'is_authenticated')
-          >>> mock_config.set_request_property.assert_any_call(*args,
+          >>> mock_config.add_request_method.assert_any_call(*args,
           ...         reify=True)
           >>> args = (get_authenticated_user, 'user')
-          >>> mock_config.set_request_property.assert_any_call(*args,
+          >>> mock_config.add_request_method.assert_any_call(*args,
           ...         reify=True)
           >>> args = (get_user_json, 'user_json')
-          >>> mock_config.set_request_property.assert_any_call(*args,
+          >>> mock_config.add_request_method.assert_any_call(*args,
           ...         reify=True)
           >>> args = (get_is_post_login, 'is_post_login')
-          >>> mock_config.set_request_property.assert_any_call(*args,
+          >>> mock_config.add_request_method.assert_any_call(*args,
           ...         reify=True)
           >>> args = (get_is_post_signup, 'is_post_signup')
-          >>> mock_config.set_request_property.assert_any_call(*args,
+          >>> mock_config.add_request_method.assert_any_call(*args,
           ...         reify=True)
 
       Exposes the authentication views::
@@ -78,14 +78,14 @@ def includeme(config):
 
     # Add ``is_authenticated`` and ``user`` properties to the request.
     settings = config.registry.settings
-    config.set_request_property(get_is_authenticated, 'is_authenticated',
+    config.add_request_method(get_is_authenticated, 'is_authenticated',
                                 reify=True)
-    config.set_request_property(get_authenticated_user, 'user', reify=True)
-    config.set_request_property(get_user_json, 'user_json', reify=True)
+    config.add_request_method(get_authenticated_user, 'user', reify=True)
+    config.add_request_method(get_user_json, 'user_json', reify=True)
 
     # Add ``is_post_login`` and ``is_post_signup`` request properties.
-    config.set_request_property(get_is_post_login, 'is_post_login', reify=True)
-    config.set_request_property(get_is_post_signup, 'is_post_signup',
+    config.add_request_method(get_is_post_login, 'is_post_login', reify=True)
+    config.add_request_method(get_is_post_signup, 'is_post_signup',
                                 reify=True)
 
     # Expose the authentication views.
