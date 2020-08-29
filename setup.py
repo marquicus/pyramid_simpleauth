@@ -51,7 +51,7 @@ setup(
         'mock',
         'paste',
         'webtest',
-        'pyDNS',
+        'py3DNS',
         'dnspython3',
     ]
 )
