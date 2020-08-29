@@ -43,7 +43,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.orm import exc as orm_exc
 from sqlalchemy.schema import UniqueConstraint
 
-from zope.interface import implements
+from zope.interface import implementer
 
 from pyramid.security import ALL_PERMISSIONS
 from pyramid.security import Allow, Deny
@@ -334,20 +334,18 @@ def set_canonical_id(user, *args, **kwargs):
     if 'canonical_id' not in kwargs:
         user.canonical_id = generate_canonical_id()
 
+@implementer(IRole)
 class Role(Base, BaseMixin):
     """Role a user may have (like admin or editor)."""
-
-    implements(IRole)
 
     __tablename__ = 'auth_roles'
 
     name = Column(Unicode(33), unique=True)
     description = Column(Unicode(256))
 
+@implementer(IUser)
 class User(Base, BaseMixin):
     """Model class encapsulating a user."""
-
-    implements(IUser)
 
     __tablename__ = 'auth_users'
 
@@ -457,10 +455,9 @@ class User(Base, BaseMixin):
     preferred_email = property(get_preferred_email, set_preferred_email)
 
 
+@implementer(IEmail)
 class Email(Base, BaseMixin):
     """A user's email address with optional confirmation data."""
-
-    implements(IEmail)
 
     __tablename__ = 'auth_emails'
     __table_args__ = (
